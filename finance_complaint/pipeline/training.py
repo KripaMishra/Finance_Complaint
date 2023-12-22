@@ -1,8 +1,8 @@
 from finance_complaint.exception import FinanceException
 from finance_complaint.logger import logger
 from finance_complaint.config.pipeline.training import FinanceConfig
-from finance_complaint.components import DataIngestion, DataValidation, 
-from finance_complaint.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
+from finance_complaint.components import DataIngestion, DataValidation, DataTransformation
+from finance_complaint.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataTransformationArtifact
 
 import sys
 
@@ -30,5 +30,16 @@ class TrainingPipeline:
 
             data_validation_artifact = data_validation.initiate_data_validation()
             return data_validation_artifact
+        except Exception as e:
+            raise FinanceException(e, sys)
+    def start_data_transformation(self, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
+        try:
+            data_transformation_config = self.finance_config.get_data_transformation_config()
+            data_transformation = DataTransformation(data_validation_artifact=data_validation_artifact,
+                                                     data_transformation_config=data_transformation_config
+
+                                                     )
+            data_transformation_artifact = data_transformation.initiate_data_transformation()
+            return data_transformation_artifact
         except Exception as e:
             raise FinanceException(e, sys)

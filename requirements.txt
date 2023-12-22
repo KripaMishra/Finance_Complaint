@@ -4,6 +4,5 @@ pyspark==3.2.1
 PyYAML==6.0
 ipykernel==6.15.0
 boto3==1.24.82
-
 pymongo[srv]
 -e .
