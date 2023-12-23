@@ -103,8 +103,11 @@ class FrequencyEncoderModel(FrequencyEncoder, Transformer):
         return dataframe
 
 
-class DerivedFeatureGenerator(Transformer, HasInputCols, HasOutputCols,
-                              DefaultParamsReadable, DefaultParamsWritable):
+class DerivedFeatureGenerator(Transformer, 
+                              HasInputCols,
+                              HasOutputCols,
+                              DefaultParamsReadable,
+                              DefaultParamsWritable):
 
     @keyword_only
     def __init__(self, inputCols: List[str] = None, outputCols: List[str] = None, ):

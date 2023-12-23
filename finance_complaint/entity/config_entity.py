@@ -21,3 +21,11 @@ DataTransformationConfig= namedtuple("DataTransformationConfig",[
                                                                     'transformed_test_dir',
                                                                     'test_size'
                                                                 ])
+
+ModelTrainerConfig= namedtuple("ModelTrainerConfig",[
+    "base_accuracy",
+    "trained_model_file_path", 
+    "metric_llist",
+    'label_indexer_model_dir'
+])
+
