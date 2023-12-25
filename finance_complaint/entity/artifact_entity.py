@@ -4,7 +4,7 @@ from datetime import datetime
 DataIngestionArtifact = namedtuple("DataIngestionArtifact", ["feature_store_file_path", "metadata_file_path", "download_dir"])
 
 DataValidationArtifact = namedtuple("DataValidationArtifact",
-                                    ["accepted_file_patj", "rejected_dir"])
+                                    ["accepted_file_path", "rejected_dir"])
 
 DataTransformationArtifact= namedtuple("DataTransformationArtifact",[
                                                                         'transformed_train_file_paath',
@@ -46,3 +46,21 @@ class ModelTrainerArtifact:
             return response
         except Exception as e:
             raise e
+        
+
+class ModelEvaluationArtifact:
+    def __init__(self, model_accepted, changed_accuracy, trained_model_path , best_model_path, active):
+        self.model_accepted= model_accepted
+        self.changed_accuracy= changed_accuracy
+        self.trained_model_path= trained_model_path
+        self.best_model_path=best_model_path
+        self.active= active
+        self.created_timestamp= datetime.now()
+
+    def to_dict(self):
+        """
+        This function will return a dictonary of artifact attributes and their values, which will be helpful in serialization
+        """
+        return self.__dict__
+    def __str__(self):
+        return str(self.to_dict)

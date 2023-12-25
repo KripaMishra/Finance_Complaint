@@ -29,3 +29,6 @@ ModelTrainerConfig= namedtuple("ModelTrainerConfig",[
     'label_indexer_model_dir'
 ])
 
+ModelEvaluationConfig = namedtuple("ModelEvaluationConfig",
+                                   ["model_evaluation_report_file_path", "threshold", "metric_list", "model_dir",
+                                    "bucket_name"])

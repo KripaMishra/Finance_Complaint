@@ -24,8 +24,8 @@ class CloudEstimator(ABC):
         """
 
         Args:
-            key: cloud storage key where model is location
-        Returns: return List of all model cloud storage key path
+            key: cloud storage key where model is located
+        Returns: List of all model cloud storage key path
 
         """
         pass
@@ -85,8 +85,8 @@ class CloudEstimator(ABC):
     @abstractmethod
     def save(self, model_dir, key):
         """
-        This function save provide model dir to cloud
-        It internally compress the model dir then upload it to cloud
+        This function saves provided model dir to cloud
+        It internally compress the model dir then uploades it to cloud
         Args:
             model_dir: Model dir to compress
             key: cloud storage key where model will be saved
@@ -99,7 +99,7 @@ class CloudEstimator(ABC):
     @abstractmethod
     def load(self, key, extract_dir) -> str:
         """
-        This function download the latest  model if complete cloud storage key for model not provided else
+        This function will download the latest  model if complete cloud storage key for model is not provided, else
         model will be downloaded using provided model key path in extract dir
         Args:
             key:
