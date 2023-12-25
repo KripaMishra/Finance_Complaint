@@ -64,3 +64,5 @@ class ModelEvaluationArtifact:
         return self.__dict__
     def __str__(self):
         return str(self.to_dict)
+    
+ModelPusherArtifact = namedtuple("ModelEvaluationArtifact", ["model_pushed_dir"])

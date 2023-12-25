@@ -1,7 +1,7 @@
 from finance_complaint.exception import FinanceException
 from finance_complaint.logger import logger
 from finance_complaint.config.pipeline.training import FinanceConfig
-from finance_complaint.components import DataIngestion, DataValidation, DataTransformation, ModelTrainer, ModelEvaluation
+from finance_complaint.components import DataIngestion, DataValidation, DataTransformation, ModelTrainer, ModelEvaluation,ModelPusher
 from finance_complaint.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact, ModelEvaluationArtifact
 
 import sys
@@ -54,6 +54,7 @@ class TrainingPipeline:
             return model_trainer_artifact
         except Exception as e:
             raise FinanceException(e, sys)
+    
     def start_model_evaluation(self, data_validation_artifact, model_trainer_artifact) -> ModelEvaluationArtifact:
         try:
             model_eval_config = self.finance_config.get_model_evaluation_config()
@@ -64,3 +65,16 @@ class TrainingPipeline:
             return model_eval.initiate_model_evaluation()
         except Exception as e:
             raise FinanceException(e, sys)
+        
+    def start_model_pusher(self, model_trainer_artifact: ModelTrainerArtifact):
+        try:
+            model_pusher_config = self.finance_config.get_model_pusher_config()
+            model_pusher = ModelPusher(model_trainer_artifact=model_trainer_artifact,
+                                       model_pusher_config=model_pusher_config
+                                       )
+            return model_pusher.initiate_model_pusher()
+        except Exception as e:
+            raise FinanceException(e, sys)
+     
+    
+    

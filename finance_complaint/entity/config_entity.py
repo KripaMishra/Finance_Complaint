@@ -32,3 +32,4 @@ ModelTrainerConfig= namedtuple("ModelTrainerConfig",[
 ModelEvaluationConfig = namedtuple("ModelEvaluationConfig",
                                    ["model_evaluation_report_file_path", "threshold", "metric_list", "model_dir",
                                     "bucket_name"])
+ModelPusherConfig = namedtuple("ModelPusherConfig", ["model_dir", "bucket_name"])
